@@ -1,6 +1,12 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import Home from './components/Home'
+import React from "react";
+import App from "./App";
+import { BrowserRouter } from "react-router-dom";
+import { hydrateRoot } from "react-dom/client";
 
-ReactDOM.hydrate(<Home />, document.getElementById('root'))
-
+const container = document.getElementById("root");
+hydrateRoot(
+  container,
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>
+);
