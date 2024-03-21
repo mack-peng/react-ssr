@@ -5,7 +5,7 @@ import { hydrateRoot } from "react-dom/client";
 
 const container = document.getElementById("root");
 hydrateRoot(
-  container,
+  container!,
   <BrowserRouter>
     <App />
   </BrowserRouter>
