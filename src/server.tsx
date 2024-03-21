@@ -9,9 +9,8 @@ const app = express();
 app.use(express.static("public"));
 
 app.get("*", (req, res) => {
-  const context = {};
   let html = renderToString(
-    <StaticRouter location={req.url} context={context}>
+    <StaticRouter location={req.url}>
       <App />
     </StaticRouter>
   );
