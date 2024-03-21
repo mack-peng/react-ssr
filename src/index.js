@@ -1,25 +1,32 @@
 import express from "express";
 import React from "react";
 import { renderToString } from "react-dom/server";
-import Home from "./client/components/Home";
+import { StaticRouter } from "react-router-dom/server";
+import App from "./client/App";
 
 const app = express();
 
 app.use(express.static("public"));
-app.get("/", (req, res) => {
-  const content = renderToString(<Home />);
 
-  const html = `
+app.get("*", (req, res) => {
+  const context = {};
+  let html = renderToString(
+    <StaticRouter location={req.url} context={context}>
+      <App />
+    </StaticRouter>
+  );
+
+  const content = `<!DOCTYPE html> 
     <html>
-      <head></head>
-      <body>
-        <div id="root">${content}</div>
-        <script src="bundle.js"></script>
-      </body>
-    </html>
-  `;
-
-  res.send(html);
+    <head>
+      <title>Server Rendered App</title>
+    </head>
+    <body>
+    <div id="root">${html}</div>
+      <script src="bundle.js"></script>
+    </body>
+  </html>`;
+  res.send(content);
 });
 
 app.listen(3000, () => {

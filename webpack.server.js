@@ -1,5 +1,5 @@
-const path = require("path")
-const webpackNodeExternals = require("webpack-node-externals")
+const path = require("path");
+const webpackNodeExternals = require("webpack-node-externals");
 
 module.exports = {
   mode: "development",
@@ -7,7 +7,7 @@ module.exports = {
   entry: "./src/index.js",
   output: {
     filename: "bundle.js",
-    path: path.resolve(__dirname, "build")
+    path: path.resolve(__dirname, "build"),
   },
   module: {
     rules: [
@@ -15,8 +15,14 @@ module.exports = {
         test: /\.js$/,
         loader: "babel-loader",
         exclude: /node_modules/,
-      }
-    ]
+      },
+    ],
   },
-  externals: [webpackNodeExternals()]
-}
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "src/"),
+    },
+    extensions: [".js", ".jsx", ".ts", ".tsx", ".json"],
+  },
+  externals: [webpackNodeExternals()],
+};
