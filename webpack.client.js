@@ -2,7 +2,7 @@ const path = require("path");
 
 module.exports = {
   mode: "development",
-  target: "node",
+  target: "web",
   entry: "./src/client.tsx",
   output: {
     filename: "bundle.js",
